@@ -1,0 +1,6 @@
+name,email,password
+Valid User,valid.user@example.com,password123
+Invalid Email,invalid-email-format,password456
+Empty Name,,password789
+Valid User 2,valid.user2@example.com,password101
+Duplicate Email,valid.user@example.com,password202
