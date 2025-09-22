@@ -29,6 +29,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["product_id"], name: "carts_product_id_index"
+    t.index ["user_id"], name: "carts_user_id_index"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -60,6 +62,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.integer "product_id"
     t.integer "category_id"
     t.integer "parent_id"
+    t.index ["category_id"], name: "category_products_category_id_index"
+    t.index ["parent_id"], name: "category_products_parent_id_index"
+    t.index ["product_id"], name: "category_products_product_id_index"
   end
 
   create_table "email_formats", force: :cascade do |t|
@@ -73,6 +78,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.integer "created_by"
     t.integer "updated_by"
     t.integer "deleted_by"
+    t.index ["id"], name: "email_formats_id_index"
+    t.index ["type"], name: "email_formats_type_index"
   end
 
   create_table "email_histories", force: :cascade do |t|
@@ -86,6 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.integer "created_by"
     t.integer "updated_by"
     t.integer "deleted_by"
+    t.index ["id"], name: "email_histories_id_index"
   end
 
   create_table "email_templates", force: :cascade do |t|
@@ -101,6 +109,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.integer "created_by"
     t.integer "updated_by"
     t.integer "deleted_by"
+    t.index ["id"], name: "email_templates_id_index"
+    t.index ["type"], name: "email_templates_type_index"
   end
 
   create_table "failed_jobs", force: :cascade do |t|
@@ -111,6 +121,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.text "payload"
     t.text "exception"
     t.datetime "failed_at"
+    t.index ["uuid"], name: "failed_jobs_uuid_unique", unique: true
   end
 
   create_table "homebanners", force: :cascade do |t|
@@ -145,6 +156,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.bigint "updated_by"
     t.bigint "deleted_by"
     t.datetime "deleted_at"
+    t.index ["id"], name: "import_csv_logs_id_index"
+    t.index ["status"], name: "import_csv_logs_status_index"
+    t.index ["user_id"], name: "import_csv_logs_user_id_index"
   end
 
   create_table "job_batches", force: :cascade do |t|
@@ -168,6 +182,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.integer "reserved_at"
     t.integer "available_at"
     t.integer "created_at"
+    t.index ["queue"], name: "jobs_queue_index"
   end
 
   create_table "migrations", force: :cascade do |t|
@@ -192,6 +207,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["milestone_id"], name: "milestone_histories_milestone_id_index"
+    t.index ["order_id"], name: "milestone_histories_order_id_index"
+    t.index ["updated_by"], name: "milestone_histories_updated_by_index"
+    t.index ["user_id"], name: "milestone_histories_user_id_index"
   end
 
   create_table "milestones", force: :cascade do |t|
@@ -216,6 +235,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expires_at"
+    t.index ["user_id"], name: "oauth_access_tokens_user_id_index"
   end
 
   create_table "oauth_auth_codes", force: :cascade do |t|
@@ -225,6 +245,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.text "scopes"
     t.string "revoked", limit: 1
     t.datetime "expires_at"
+    t.index ["user_id"], name: "oauth_auth_codes_user_id_index"
   end
 
   create_table "oauth_clients", force: :cascade do |t|
@@ -239,6 +260,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "revoked", limit: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["user_id"], name: "oauth_clients_user_id_index"
   end
 
   create_table "oauth_personal_access_clients", force: :cascade do |t|
@@ -253,6 +275,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "access_token_id", limit: 100
     t.string "revoked", limit: 1
     t.datetime "expires_at"
+    t.index ["access_token_id"], name: "oauth_refresh_tokens_access_token_id_index"
   end
 
   create_table "order_products", force: :cascade do |t|
@@ -278,6 +301,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["order_id"], name: "order_products_order_id_index"
+    t.index ["product_id"], name: "order_products_product_id_index"
   end
 
   create_table "order_statuses", force: :cascade do |t|
@@ -290,6 +315,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["order_id"], name: "order_statuses_order_id_index"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -308,6 +334,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["user_id"], name: "orders_user_id_index"
   end
 
   create_table "password_reset_tokens", force: :cascade do |t|
@@ -316,11 +343,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "token", limit: 191
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["id"], name: "password_resets_id_index"
   end
 
   create_table "permission_role", force: :cascade do |t|
     t.integer "permission_id"
     t.integer "role_id"
+    t.index ["permission_id"], name: "permission_role_permission_id_index"
+    t.index ["role_id"], name: "permission_role_role_id_index"
   end
 
   create_table "permissions", force: :cascade do |t|
@@ -348,6 +378,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["product_id"], name: "product_galleries_product_id_index"
   end
 
   create_table "product_histories", force: :cascade do |t|
@@ -381,6 +412,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["category_id"], name: "product_histories_category_id_index"
+    t.index ["sub_category_id"], name: "product_histories_sub_category_id_index"
   end
 
   create_table "products", force: :cascade do |t|
@@ -414,6 +447,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.index ["category_id"], name: "products_category_id_index"
+    t.index ["sub_category_id"], name: "products_sub_category_id_index"
   end
 
   create_table "pulse_aggregates", force: :cascade do |t|
@@ -426,6 +461,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "aggregate", limit: 191
     t.decimal "value"
     t.integer "count"
+    t.index ["bucket", "period", "type", "aggregate", "key_hash"], name: "pulse_aggregates_bucket_period_type_aggregate_key_hash_unique", unique: true
+    t.index ["period", "bucket"], name: "pulse_aggregates_period_bucket_index"
+    t.index ["period", "type", "aggregate", "bucket"], name: "pulse_aggregates_period_type_aggregate_bucket_index"
+    t.index ["type"], name: "pulse_aggregates_type_index"
   end
 
   create_table "pulse_entries", force: :cascade do |t|
@@ -435,6 +474,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "key"
     t.string "key_hash", limit: 16
     t.bigint "value"
+    t.index ["key_hash"], name: "pulse_entries_key_hash_index"
+    t.index ["timestamp", "type", "key_hash", "value"], name: "pulse_entries_timestamp_type_key_hash_value_index"
+    t.index ["timestamp"], name: "pulse_entries_timestamp_index"
+    t.index ["type"], name: "pulse_entries_type_index"
   end
 
   create_table "pulse_values", force: :cascade do |t|
@@ -444,6 +487,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "key"
     t.string "key_hash", limit: 16
     t.string "value"
+    t.index ["timestamp"], name: "pulse_values_timestamp_index"
+    t.index ["type", "key_hash"], name: "pulse_values_type_key_hash_unique", unique: true
+    t.index ["type"], name: "pulse_values_type_index"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -479,11 +525,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.string "type", limit: 20
     t.text "content"
     t.datetime "created_at"
+    t.index ["batch_id"], name: "telescope_entries_batch_id_index"
+    t.index ["created_at"], name: "telescope_entries_created_at_index"
+    t.index ["family_hash"], name: "telescope_entries_family_hash_index"
+    t.index ["type", "should_display_on_index"], name: "telescope_entries_type_should_display_on_index_index"
+    t.index ["uuid"], name: "telescope_entries_uuid_unique", unique: true
   end
 
   create_table "telescope_entries_tags", force: :cascade do |t|
     t.string "entry_uuid", limit: 36
     t.string "tag", limit: 191
+    t.index ["entry_uuid", "tag"], name: "telescope_entries_tags_entry_uuid_tag_index"
+    t.index ["tag"], name: "telescope_entries_tags_tag_index"
   end
 
   create_table "telescope_monitoring", force: :cascade do |t|
@@ -513,6 +566,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_12_082651) do
     t.datetime "updated_at"
     t.datetime "deleted_at"
     t.string "remember_token", limit: 100
+    t.index ["role_id"], name: "users_role_id_index"
   end
+
+  # Add Foreign Key Constraints
+  add_foreign_key "carts", "products", on_delete: :restrict
+  add_foreign_key "carts", "users", on_delete: :restrict
+  add_foreign_key "import_csv_logs", "users", on_delete: :restrict
+  add_foreign_key "milestone_histories", "milestones"
+  add_foreign_key "milestone_histories", "orders"
+  add_foreign_key "milestone_histories", "users", column: "updated_by"
+  add_foreign_key "milestone_histories", "users"
+  add_foreign_key "order_products", "products", on_delete: :restrict
+  add_foreign_key "orders", "users", on_delete: :restrict
+  add_foreign_key "product_galleries", "products", on_delete: :restrict
+  add_foreign_key "product_histories", "categories"
+  add_foreign_key "products", "categories", on_delete: :restrict
+  add_foreign_key "telescope_entries_tags", "telescope_entries", column: "entry_uuid", primary_key: "uuid", on_delete: :cascade
+  add_foreign_key "users", "roles", on_delete: :restrict
 
 end
